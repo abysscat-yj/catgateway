@@ -1,3 +1,9 @@
 spring:
   application:
     name: catgateway
+
+server:
+  port: 8888
+
+catregistry:
+  servers: http://localhost:8484
