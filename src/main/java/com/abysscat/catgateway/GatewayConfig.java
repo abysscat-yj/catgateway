@@ -2,8 +2,14 @@ package com.abysscat.catgateway;
 
 import com.abysscat.catrpc.core.registry.RegistryCenter;
 import com.abysscat.catrpc.core.registry.cat.CatRegistryCenter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
+
+import java.util.Properties;
 
 /**
  * gateway config.
@@ -19,4 +25,18 @@ public class GatewayConfig {
 		return new CatRegistryCenter();
 	}
 
+	@Bean
+	ApplicationRunner runner(@Autowired ApplicationContext context) {
+		return args -> {
+			// 通过 SimpleUrlHandlerMapping 将请求路径 /ga/** 映射到 gatewayWebHandler
+			SimpleUrlHandlerMapping handlerMapping = context.getBean(SimpleUrlHandlerMapping.class);
+
+			Properties mappings = new Properties();
+			mappings.put("/ga/**", "gatewayWebHandler");
+			handlerMapping.setMappings(mappings);
+			handlerMapping.initApplicationContext();
+
+			System.out.println("catrpc gateway start");
+		};
+	}
 }

@@ -2,7 +2,17 @@
 GET http://localhost:8888/hello
 
 ### POST rpc user
-POST http://localhost:8888/gw/com.abysscat.catrpc.demo.api.UserService
+POST http://localhost:8888/ga/com.abysscat.catrpc.demo.api.UserService
+Content-Type: application/json
+
+{
+  "service": "com.abysscat.catrpc.demo.api.UserService",
+  "methodSign": "7f90d3ebfd077ad3c1bb7b05930080a1",
+  "args": [100]
+}
+
+### POST rpc user mock
+POST http://localhost:8888/ga/com.abysscat.catrpc.demo.api.UserService?mock=true
 Content-Type: application/json
 
 {
