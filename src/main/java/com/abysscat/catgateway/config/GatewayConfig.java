@@ -1,4 +1,4 @@
-package com.abysscat.catgateway;
+package com.abysscat.catgateway.config;
 
 import com.abysscat.catrpc.core.registry.RegistryCenter;
 import com.abysscat.catrpc.core.registry.cat.CatRegistryCenter;
