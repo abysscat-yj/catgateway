@@ -34,6 +34,7 @@ public class DirectPlugin extends AbstractGatewayPlugin {
 
 		exchange.getResponse().getHeaders().add("Content-Type", "application/json");
 		exchange.getResponse().getHeaders().add("cat.gw.version", "v1.0.0");
+		exchange.getResponse().getHeaders().add("cat.gw.plugin", getName());
 
 		if (backend == null || backend.isEmpty()) {
 			return requestBody.flatMap(x -> exchange.getResponse().writeWith(Mono.just(x)))

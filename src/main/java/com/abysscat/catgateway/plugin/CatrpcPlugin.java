@@ -70,6 +70,7 @@ public class CatrpcPlugin extends AbstractGatewayPlugin {
 		// 组装响应报文
 		exchange.getResponse().getHeaders().add("Content-Type", "application/json");
 		exchange.getResponse().getHeaders().add("cat.gw.version", "v1.0.0");
+		exchange.getResponse().getHeaders().add("cat.gw.plugin", getName());
 
 		return body.flatMap(x -> exchange.getResponse()
 						.writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(x.getBytes()))))

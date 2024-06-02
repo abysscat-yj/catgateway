@@ -30,7 +30,6 @@ public abstract class AbstractGatewayPlugin implements GatewayPlugin {
 	public Mono<Void> handle(ServerWebExchange exchange, GatewayPluginChain chain) {
 		boolean supported = support(exchange);
 		System.out.println(" =====>>>> plugin[" + this.getName() + "], support=" + supported);
-		exchange.getResponse().getHeaders().add("cat.gw.plugin", getName());
 		return supported ? doHandle(exchange, chain) : chain.handle(exchange);
 	}
 

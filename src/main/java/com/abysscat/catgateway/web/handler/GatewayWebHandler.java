@@ -1,5 +1,6 @@
 package com.abysscat.catgateway.web.handler;
 
+import com.abysscat.catgateway.filter.GatewayFilter;
 import com.abysscat.catgateway.plugin.DefaultGatewayPluginChain;
 import com.abysscat.catgateway.plugin.GatewayPlugin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class GatewayWebHandler implements WebHandler {
 	@Autowired
 	List<GatewayPlugin> plugins;
 
+	@Autowired
+	List<GatewayFilter> filters;
+
 	@Override
 	public Mono<Void> handle(ServerWebExchange exchange) {
 		System.out.println(" ====> cat gateway web handler ... ");
@@ -33,6 +37,11 @@ public class GatewayWebHandler implements WebHandler {
 					""";
 			return exchange.getResponse()
 					.writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(mock.getBytes())));
+		}
+
+		// 执行过滤器链
+		for (GatewayFilter filter : filters) {
+			filter.filter(exchange);
 		}
 
 		// 执行插件链
