@@ -1,8 +1,8 @@
 # GET hello
 GET http://localhost:8888/hello
 
-### POST rpc user
-POST http://localhost:8888/ga/com.abysscat.catrpc.demo.api.UserService
+### POST catrpc plguin
+POST http://localhost:8888/gw/catrpc/com.abysscat.catrpc.demo.api.UserService
 Content-Type: application/json
 
 {
@@ -11,8 +11,28 @@ Content-Type: application/json
   "args": [100]
 }
 
-### POST rpc user mock
-POST http://localhost:8888/ga/com.abysscat.catrpc.demo.api.UserService?mock=true
+### POST catrpc plguin mock
+POST http://localhost:8888/gw/com.abysscat.catrpc.demo.api.UserService?mock=true
+Content-Type: application/json
+
+{
+  "service": "com.abysscat.catrpc.demo.api.UserService",
+  "methodSign": "7f90d3ebfd077ad3c1bb7b05930080a1",
+  "args": [100]
+}
+
+### POST direct plugin
+POST http://localhost:8888/gw/direct/com.abysscat.catrpc.demo.api.UserService
+Content-Type: application/json
+
+{
+  "service": "com.abysscat.catrpc.demo.api.UserService",
+  "methodSign": "7f90d3ebfd077ad3c1bb7b05930080a1",
+  "args": [100]
+}
+
+### POST direct plugin backend
+POST http://localhost:8888/gw/direct/com.abysscat.catrpc.demo.api.UserService?backend=http://localhost:8082/catrpc
 Content-Type: application/json
 
 {

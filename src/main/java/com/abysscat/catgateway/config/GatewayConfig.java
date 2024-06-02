@@ -32,7 +32,7 @@ public class GatewayConfig {
 			SimpleUrlHandlerMapping handlerMapping = context.getBean(SimpleUrlHandlerMapping.class);
 
 			Properties mappings = new Properties();
-			mappings.put("/ga/**", "gatewayWebHandler");
+			mappings.put("/gw/**", "gatewayWebHandler");
 			handlerMapping.setMappings(mappings);
 			handlerMapping.initApplicationContext();
 
